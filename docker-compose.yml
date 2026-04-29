@@ -1,0 +1,16 @@
+services:
+  privoxy:
+    build: .
+    container_name: privoxy
+    restart: unless-stopped
+    ports:
+      - "8118:8118"
+    environment:
+      - LISTEN_ADDRESS=0.0.0.0:8118
+      - FORWARD_SOCKS5=192.168.1.2:1080
+    networks:
+      - proxy-net
+
+networks:
+  proxy-net:
+    driver: bridge
